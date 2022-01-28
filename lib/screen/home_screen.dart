@@ -21,17 +21,6 @@ class HomeScreen extends ConsumerWidget {
       ),
       drawer: const Drawer(child: DrawerMenu()),
       body: MemoList(),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {},
-      ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: Container(
-      //     color: Colors.lime,
-      //     height: 50,
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -46,7 +35,9 @@ showMakeTabDialog(BuildContext context) {
         actions: [
           TextButton(
             onPressed: () async {
-              try {} catch (e) {}
+              try {
+                Navigator.pop(context);
+              } catch (e) {}
             },
             child: const Text('OK'),
           ),
