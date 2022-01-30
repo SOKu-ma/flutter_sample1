@@ -68,11 +68,17 @@ class TabMenuController extends StatelessWidget {
                   // )),
                   child: Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.all(20),
-                          child: TextField(),
+                          height: 200,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          margin: const EdgeInsets.all(20),
+                          child: TextField(
+                            decoration: InputDecoration(hintText: "タイトル"),
+                          ),
                         ),
                         ElevatedButton(
                           child: const Text('保存'),
