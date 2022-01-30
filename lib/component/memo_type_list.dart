@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sample2/screen/memo_grid_screen.dart';
+import 'package:flutter_sample2/ui/memo_grid/memo_grid_screen.dart';
 
 class MemoList extends ConsumerWidget {
   const MemoList({Key? key}) : super(key: key);
@@ -12,56 +12,37 @@ class MemoList extends ConsumerWidget {
       Text("プライベート"),
       Text("アプリ開発"),
       Text("野球の大会"),
-      Text("サッカーの大会"),
+      Text("サッカーの大会")
     ];
 
     // リストの表示データ（サブタイトル）
-    var listSubTitle = [
-      Text(""),
-      Text("アイデア"),
-      Text("日程"),
-      Text("合宿"),
-    ];
+    var listSubTitle = [Text("あああ"), Text("アイデア"), Text("日程"), Text("合宿")];
 
-    // リストに表示するアイコンリスト
-    var iconList = [
-      Icon(Icons.lock),
-      Icon(Icons.phone_iphone),
-      Icon(Icons.sports_baseball),
-      Icon(Icons.sports_soccer),
-    ];
-
-    return Container(
-      child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            if (index < listTitle.length) {
-              return _memoList(context, iconList[index], listTitle[index],
-                  listSubTitle[index]);
-            } else {
-              return _memoAddList(context);
-            }
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 10);
-          },
-          itemCount: listTitle.length + 1),
-    );
+    return ListView.separated(
+        itemBuilder: (BuildContext context, int index) {
+          if (index < listTitle.length) {
+            return _memoList(context, listTitle[index], listSubTitle[index]);
+          } else {
+            return _memoAddList(context);
+          }
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(height: 10);
+        },
+        itemCount: listTitle.length + 1);
   }
 
   // ListViewのセル
-  _memoList(BuildContext context, Icon icon, Text title, Text subTitle) {
+  _memoList(BuildContext context, Text title, Text subTitle) {
     return ListTile(
-      leading: icon,
+      // leading: icon,
       title: title,
       subtitle: subTitle,
-      trailing: const Icon(Icons.arrow_forward_ios_sharp),
+      trailing: const Icon(Icons.arrow_forward_ios),
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => MemoPage(),
-            fullscreenDialog: true,
-          ),
+          MaterialPageRoute(builder: (context) => MemoPage()),
         );
       },
     );
@@ -69,8 +50,10 @@ class MemoList extends ConsumerWidget {
 
   // 追加行リストのセル
   _memoAddList(BuildContext context) {
-    final textTitleController = TextEditingController();
-    final textDetailController = TextEditingController();
+    final _textTitleController = TextEditingController();
+    final _textDetailController = TextEditingController();
+
+    bool _isSelected = false;
 
     return ListTile(
       leading: const Icon(Icons.add),
@@ -80,33 +63,33 @@ class MemoList extends ConsumerWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text("グループを追加"),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
                     decoration: (const InputDecoration(
                       hintText: ("メモのグループ名"),
+                      labelStyle: TextStyle(fontSize: 8),
+                      icon: Icon(Icons.note_alt_outlined),
                     )),
-                    controller: textTitleController,
+                    controller: _textTitleController,
                     onChanged: (text) {},
                   ),
-                  const SizedBox(height: 30),
                   TextField(
                     decoration: (const InputDecoration(
                       hintText: ("詳細"),
+                      icon: Icon(Icons.short_text),
                     )),
-                    controller: textDetailController,
+                    controller: _textDetailController,
                     onChanged: (text) {},
                   ),
-                  const SizedBox(height: 30),
-                  TextField(
-                    decoration: (const InputDecoration(
-                      hintText: ("アイコンを選択"),
-                    )),
-                    onTap: () {},
-                    onChanged: (text) {},
-                  )
+                  SwitchListTile(
+                    title: const Text("共有する"),
+                    value: _isSelected,
+                    onChanged: (bool val) {
+                      _isSelected = val;
+                    },
+                  ),
                 ],
               ),
               actions: [
@@ -126,35 +109,6 @@ class MemoList extends ConsumerWidget {
             );
           },
         );
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => MemoSettingScreen(),
-        //     fullscreenDialog: true,
-        //   ),
-        // );
-        // showModalBottomSheet<void>(
-        //   context: context,
-        //   builder: (BuildContext context) {
-        //     return Container(
-        //       height: 400,
-        //       child: Center(
-        //         child: Column(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           mainAxisSize: MainAxisSize.min,
-        //           children: [
-        //             const Text('Modal BottomSheet'),
-        //             TextField(),
-        //             ElevatedButton(
-        //               child: const Text('Close BottomSheet'),
-        //               onPressed: () => Navigator.pop(context),
-        //             )
-        //           ],
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // );
       },
     );
   }

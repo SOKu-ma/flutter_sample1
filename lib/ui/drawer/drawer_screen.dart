@@ -22,6 +22,7 @@ class DrawerMenu extends StatelessWidget {
               child: const Text("その他"),
             ),
             _drawerRow("レビューする", const Icon(Icons.reviews)),
+            _drawerRow("開発者の他のアプリ", const Icon(Icons.apps_rounded)),
           ],
         ),
       ),
@@ -36,6 +37,7 @@ class DrawerMenu extends StatelessWidget {
         child: const ListTile(
           leading: Icon(Icons.account_circle),
           title: Text("ユーザー（ゲスト）"),
+          subtitle: Text("aaa@test.jp"),
         ),
       ),
       onTap: () {},
@@ -58,7 +60,16 @@ class DrawerMenu extends StatelessWidget {
       child: ListTile(
         leading: icon,
         title: Text(title),
-        onTap: () {},
+        onTap: () {
+          switch (title) {
+            case "アプリカラー":
+              // ColorPicker
+              print("アプリカラー 押下");
+
+              break;
+            default:
+          }
+        },
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample2/component/memo_type_list.dart';
-import 'package:flutter_sample2/screen/drawer_screen.dart';
+import 'package:flutter_sample2/ui/drawer/drawer_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
       drawer: const Drawer(child: DrawerMenu()),
-      body: MemoList(),
+      body: const MemoList(),
     );
   }
 }
