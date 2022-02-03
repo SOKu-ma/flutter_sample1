@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomeScreen(),
       darkTheme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
         brightness: Brightness.dark,
       ),
       themeMode: ThemeMode.system,

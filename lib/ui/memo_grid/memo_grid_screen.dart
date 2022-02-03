@@ -35,7 +35,7 @@ class TabMenuController extends StatelessWidget {
       initialIndex: 0,
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50),
+          preferredSize: const Size.fromHeight(50),
           child: AppBar(
             bottom: TabBar(
               tabs: _tab,
@@ -71,18 +71,64 @@ class TabMenuController extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          height: 200,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey)),
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          margin: const EdgeInsets.all(20),
-                          child: TextField(
-                            decoration: InputDecoration(hintText: "タイトル"),
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          margin: const EdgeInsets.all(10),
+                          child: Column(
+                            children: const [
+                              TextField(
+                                decoration: InputDecoration(hintText: "タイトル"),
+                              ),
+                              TextField(
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                decoration: InputDecoration(hintText: "メモ"),
+                              ),
+                            ],
                           ),
                         ),
-                        ElevatedButton(
-                          child: const Text('保存'),
-                          onPressed: () => Navigator.pop(context),
+                        Container(
+                          margin: const EdgeInsets.only(left: 10, right: 10),
+                          child: ListTile(
+                            title: Text("期限"),
+                            trailing: Text("2022/02/02"),
+                            onTap: () {
+                              print("DatePickerを表示");
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 10, right: 10),
+                          child: ListTile(
+                            title: const Text("メモの色"),
+                            onTap: () {
+                              print("カラーピッカーを表示");
+                            },
+                            trailing: Container(
+                              margin: const EdgeInsets.only(
+                                  left: 10, top: 5, right: 20),
+                              height: 30,
+                              width: 30,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(
+                              left: 10, right: 10, top: 20),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              textStyle: TextStyle(fontSize: 24),
+                            ),
+                            child: const Text(
+                              '保存',
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                          ),
                         )
                       ],
                     ),
