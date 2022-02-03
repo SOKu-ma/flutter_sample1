@@ -15,14 +15,38 @@ class DrawerMenu extends StatelessWidget {
               margin: const EdgeInsets.only(left: 20, right: 10),
               child: const Text("基本設定"),
             ),
-            _drawerRow("アプリカラー", const Icon(Icons.color_lens)),
+            _drawerRow(
+                "アプリカラー",
+                const Icon(
+                  Icons.color_lens,
+                  color: Colors.green,
+                )),
             const SizedBox(height: 40),
             Container(
               margin: const EdgeInsets.only(left: 20, right: 10),
               child: const Text("その他"),
             ),
-            _drawerRow("レビューする", const Icon(Icons.reviews)),
-            _drawerRow("開発者の他のアプリ", const Icon(Icons.apps_rounded)),
+            _drawerRow(
+              "レビューする",
+              const Icon(
+                Icons.reviews,
+                color: Colors.green,
+              ),
+            ),
+            _drawerRow(
+              "開発者の他のアプリ",
+              const Icon(
+                Icons.apps_rounded,
+                color: Colors.green,
+              ),
+            ),
+            _drawerRow(
+              "アプリのバージョン",
+              const Icon(
+                Icons.phone_iphone_outlined,
+                color: Colors.green,
+              ),
+            ),
           ],
         ),
       ),
@@ -35,7 +59,10 @@ class DrawerMenu extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(left: 10, right: 10),
         child: const ListTile(
-          leading: Icon(Icons.account_circle),
+          leading: Icon(
+            Icons.account_circle,
+            color: Colors.green,
+          ),
           title: Text("ユーザー（ゲスト）"),
           subtitle: Text("aaa@test.jp"),
         ),
