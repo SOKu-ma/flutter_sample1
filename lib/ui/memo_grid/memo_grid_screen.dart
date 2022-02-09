@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample2/component/memo_type_grid.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 class MemoPage extends ConsumerWidget {
   MemoPage({Key? key}) : super(key: key);
@@ -27,6 +28,9 @@ class TabMenuController extends StatelessWidget {
     const Tab(text: 'Memo2'),
     const Tab(text: 'Memo3'),
   ];
+
+  final _textEditTitleController = TextEditingController();
+  final _textEditContentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +62,7 @@ class TabMenuController extends StatelessWidget {
               builder: (BuildContext context) {
                 return Container(
                   color: Colors.white,
-                  margin: EdgeInsets.only(top: 70),
+                  margin: const EdgeInsets.only(top: 70),
                   // decoration: (BoxDecoration(
                   //   //角丸にする
                   //   borderRadius: BorderRadius.only(
@@ -71,23 +75,21 @@ class TabMenuController extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          margin: const EdgeInsets.all(10),
-                          child: Column(
-                            children: const [
-                              TextField(
-                                decoration: InputDecoration(hintText: "タイトル"),
-                              ),
-                              TextField(
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                decoration: InputDecoration(hintText: "メモ"),
-                              ),
-                            ],
+                          margin: const EdgeInsets.only(top: 20, bottom: 10),
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: TextField(
+                            controller: _textEditTitleController,
+                            decoration: const InputDecoration(hintText: "タイトル"),
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 20, bottom: 10),
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: _keyboardActions(),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 10),
                           child: ListTile(
                             title: Text("期限"),
                             trailing: Text("2022/02/02"),
@@ -97,7 +99,8 @@ class TabMenuController extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 10, right: 10),
+                          margin: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 10),
                           child: ListTile(
                             title: const Text("メモの色"),
                             onTap: () {
@@ -109,9 +112,7 @@ class TabMenuController extends StatelessWidget {
                               height: 30,
                               width: 30,
                               decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.black,
-                              ),
+                                  shape: BoxShape.circle, color: Colors.black),
                             ),
                           ),
                         ),
@@ -122,11 +123,9 @@ class TabMenuController extends StatelessWidget {
                               left: 10, right: 10, top: 20),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              textStyle: TextStyle(fontSize: 24),
+                              textStyle: const TextStyle(fontSize: 24),
                             ),
-                            child: const Text(
-                              '保存',
-                            ),
+                            child: const Text('保存'),
                             onPressed: () => Navigator.pop(context),
                           ),
                         )
@@ -139,6 +138,34 @@ class TabMenuController extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  final FocusNode _textNode1 = FocusNode();
+
+  _keyboardActions() {
+    return KeyboardActions(
+      isDialog: true,
+      autoScroll: false,
+      config: _keyboardActionConfig(),
+      child: TextField(
+        controller: _textEditContentController,
+        decoration: const InputDecoration(hintText: "メモの詳細"),
+        focusNode: _textNode1,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+      ),
+    );
+  }
+
+  _keyboardActionConfig() {
+    return KeyboardActionsConfig(
+      keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
+      nextFocus: true,
+      actions: [
+        KeyboardActionsItem(
+            focusNode: _textNode1, toolbarButtons: []),
+      ],
     );
   }
 }

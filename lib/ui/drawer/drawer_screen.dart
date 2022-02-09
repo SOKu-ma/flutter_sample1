@@ -12,41 +12,20 @@ class DrawerMenu extends StatelessWidget {
             _drawerAccount(),
             const SizedBox(height: 40),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 10),
-              child: const Text("基本設定"),
-            ),
+                margin: const EdgeInsets.only(left: 20, right: 10),
+                child: const Text("基本設定")),
             _drawerRow(
-                "アプリカラー",
-                const Icon(
-                  Icons.color_lens,
-                  color: Colors.green,
-                )),
+                "アプリカラー", const Icon(Icons.color_lens, color: Colors.green)),
             const SizedBox(height: 40),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 10),
-              child: const Text("その他"),
-            ),
+                margin: const EdgeInsets.only(left: 20, right: 10),
+                child: const Text("その他")),
             _drawerRow(
-              "レビューする",
-              const Icon(
-                Icons.reviews,
-                color: Colors.green,
-              ),
-            ),
-            _drawerRow(
-              "開発者の他のアプリ",
-              const Icon(
-                Icons.apps_rounded,
-                color: Colors.green,
-              ),
-            ),
-            _drawerRow(
-              "アプリのバージョン",
-              const Icon(
-                Icons.phone_iphone_outlined,
-                color: Colors.green,
-              ),
-            ),
+                "レビューする", const Icon(Icons.reviews, color: Colors.green)),
+            _drawerRow("開発者の他のアプリ",
+                const Icon(Icons.apps_rounded, color: Colors.green)),
+            _drawerRow("アプリのバージョン",
+                const Icon(Icons.phone_iphone_outlined, color: Colors.green)),
           ],
         ),
       ),
