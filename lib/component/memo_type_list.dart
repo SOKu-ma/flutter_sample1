@@ -60,8 +60,97 @@ class MemoList extends ConsumerWidget {
       leading: const Icon(Icons.add),
       title: const Text("新規グループを追加"),
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => GroupSettings()));
+        showModalBottomSheet<void>(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          barrierColor: Colors.black.withAlpha(1),
+          backgroundColor: Colors.white,
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.95),
+          isDismissible: true,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext context) {
+            return GroupSettings();
+            // return Container(
+            //   color: Colors.white,
+            //   margin: const EdgeInsets.only(top: 70),
+            //   // decoration: (BoxDecoration(
+            //   //   //角丸にする
+            //   //   borderRadius: BorderRadius.only(
+            //   //     topLeft: Radius.circular(20),
+            //   //     topRight: Radius.circular(20),
+            //   //   ),
+            //   // )),
+            //   child: Center(
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.start,
+            //       children: [
+            //         // Container(
+            //         //   margin: const EdgeInsets.only(top: 20, bottom: 10),
+            //         //   padding: const EdgeInsets.only(left: 20, right: 20),
+            //         //   child: TextField(
+            //         //     controller: _textEditTitleController,
+            //         //     decoration: const InputDecoration(hintText: "タイトル"),
+            //         //   ),
+            //         // ),
+            //         // Container(
+            //         //   margin: const EdgeInsets.only(top: 20, bottom: 10),
+            //         //   padding: const EdgeInsets.only(left: 20, right: 20),
+            //         //   child: _keyboardActions(),
+            //         // ),
+            //         // Container(
+            //         //   margin: const EdgeInsets.only(
+            //         //       left: 10, right: 10, top: 10, bottom: 10),
+            //         //   child: ListTile(
+            //         //     title: Text("期限"),
+            //         //     trailing: Text("2022/02/02"),
+            //         //     onTap: () {
+            //         //       print("DatePickerを表示");
+            //         //     },
+            //         //   ),
+            //         // ),
+            //         // Container(
+            //         //   margin: const EdgeInsets.only(
+            //         //       left: 10, right: 10, top: 10, bottom: 10),
+            //         //   child: ListTile(
+            //         //     title: const Text("メモの色"),
+            //         //     onTap: () {
+            //         //       print("カラーピッカーを表示");
+            //         //     },
+            //         //     trailing: Container(
+            //         //       margin: const EdgeInsets.only(
+            //         //           left: 10, top: 5, right: 20),
+            //         //       height: 30,
+            //         //       width: 30,
+            //         //       decoration: const BoxDecoration(
+            //         //           shape: BoxShape.circle, color: Colors.black),
+            //         //     ),
+            //         //   ),
+            //         // ),
+            //         // Container(
+            //         //   height: 50,
+            //         //   width: double.infinity,
+            //         //   margin: const EdgeInsets.only(
+            //         //       left: 10, right: 10, top: 20),
+            //         //   child: ElevatedButton(
+            //         //     style: ElevatedButton.styleFrom(
+            //         //       textStyle: const TextStyle(fontSize: 24),
+            //         //     ),
+            //         //     child: const Text('保存'),
+            //         //     onPressed: () => Navigator.pop(context),
+            //         //   ),
+            //         // )
+            //       ],
+            //     ),
+            //   ),
+            // );
+          },
+        );
+
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => GroupSettings()));
         // showDialog(
         //   context: context,
         //   builder: (BuildContext context) {
